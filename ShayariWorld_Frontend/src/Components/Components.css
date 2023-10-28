@@ -1,0 +1,241 @@
+
+
+
+.navbar{
+    height: 50px;
+}
+
+
+
+h1 {
+    margin-bottom: 0px; /* Adjust the margin to reduce space */
+}
+
+h3 {
+margin-top: 0px; /* Adjust the margin to reduce space */
+font-weight: 500;
+background: linear-gradient(to right, #0b97e3,#0b97e3, #033753,rgb(0, 4, 0),rgb(0, 4, 0), #0272af, #0b97e3, #0b97e3);
+color: transparent;
+background-clip: text;
+-webkit-background-clip: text; /* Safari/Chrome */
+-moz-background-clip: text; /* Firefox */
+background-clip: text;
+
+display: inline;
+
+}
+
+
+
+.App{
+    background-color: #000000;
+    background-image: url('./Assets/PeacockFeather.jpg');
+    filter: contrast(130%) brightness(100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.App-header {
+    background-color: transparent;    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+0% {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+100% {
+    transform: translateX(0);
+    opacity: 1;
+}
+}
+
+
+
+.continue_btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #1e1e1e; /* Dark background color */
+    color: #00d8ff; /* Futuristic blue text color */
+    font-size: 16px;
+    border: solid 0.1em rgb(0, 236, 236);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, color 0.3s;
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: bold; /* Bold text */
+    letter-spacing: 1px; /* Increase letter spacing */
+    text-decoration: none; /* Remove underlines */
+    box-shadow: 0 0 10px rgba(0, 216, 255, 0.3); /* Futuristic glow effect */
+}
+
+.continue_btn:hover {
+background-color: #00d8ff; /* Bright blue background on hover */
+color: #1e1e1e; /* Dark text color on hover */
+transform: scale(1.05); /* Slight scale-up on hover */
+box-shadow: 0 0 15px rgba(0, 216, 255, 0.6); /* Enhanced glow on hover */
+}
+
+.continue_btn:active {
+transform: scale(0.95); /* Slight scale-down when clicked */
+box-shadow: none; /* Remove the glow effect when clicked */
+}
+
+
+
+.text-area {
+    position: relative;
+    width: 100%;
+    max-width: 80%; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.text {
+    backdrop-filter: blur(10px);
+    background-color: rgba(212, 139, 3, 0.048);
+    width: 80%;
+    padding: 20px;
+    color: white;
+    font-size: 16px;
+    /* font-weight: 50; */
+    border: 1px solid transparent;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgb(0, 174, 255) inset;
+    resize: none;
+}
+
+.name-input {
+    /* position: absolute; */
+    backdrop-filter: blur(10px);
+    background-color: rgba(212, 139, 3, 0.048);
+    color: rgb(197, 155, 1);
+    width: 30%;
+    padding: 8px;
+    margin-top: 3%;
+    margin-left: 53%;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgb(197, 155, 1) inset;
+    font-size: 14px;
+    outline: none;
+}
+
+@media (max-width: 68px) {
+    .text-area {
+        padding: 10px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+}
+
+
+
+.name_pic{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align:center;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+}
+
+.name_pic img{
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    box-shadow: 0 0 20px cyan;
+    animation: clr_change 4s linear infinite;
+}
+@keyframes clr_change{
+    0%{
+        box-shadow: 0 0 20px rgb(0, 123, 223);
+    }
+    100%{
+        box-shadow: 0 0 20px rgb(255, 0, 0);
+    }
+}
+
+.glow-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(231, 196, 0);
+    text-shadow: 0 0 1px rgb(231, 196, 0), 0 0 1px rgb(231, 196, 0), 0 0 5px rgb(231, 196, 0);
+}
+  
+.rating{
+    width: 16%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    /* background-color: #00d8ff; */
+}
+
+.active_star{
+    color: cyan;
+    animation: glow 0.5s infinite alternate;
+}
+@keyframes glow {
+    0% {
+      opacity: 0.1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+}
+
+.hr_line{
+    border: none;
+    height: 0.2em;
+    width: 60%;
+    background: cyan;
+    box-shadow: 0 0 10px cyan;
+}
+
+
+
+.profile_navbar{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-bottom: 1%;
+    border-bottom: 1px solid cyan;
+    box-shadow: 0 4px 0 0 rgba(0, 255, 255, 0.10);
+}
+
+.profile_navbar_item{
+    border-bottom: 2px solid transparent;
+}
+
+.profile_navbar_item:hover{
+    cursor:pointer;
+    color: cyan;
+    border-bottom: 2px cyan solid;
+}
+
+.profile_details{
+    background-color: #00d8ff;
+    height: 100px;
+}
