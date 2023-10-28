@@ -1,7 +1,7 @@
 import './App.css';
-// import Home from './Components/Home';
-// import Type from './Components/Type';
-// import Navbar from './Components/Navbar';
+import Home from './Components/Home';
+import Type from './Components/Type';
+import Navbar from './Components/Navbar';
 import ProfilePage from './Components/ProfilePage';
 
 function App() {

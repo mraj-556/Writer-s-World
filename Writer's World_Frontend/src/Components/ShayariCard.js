@@ -1,9 +1,11 @@
 import React from 'react'
 import './Components.css'
 
-function ShayariCard() {
+function ShayariCard(props) {
   return (
-    <div>Its Shayari card</div>
+    <pre className='shayari_card'>
+      {props.text}
+    </pre>
   )
 }
 

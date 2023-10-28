@@ -1,5 +1,6 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Butcherman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nosifer&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 .navbar{
     height: 50px;
@@ -8,20 +9,27 @@
 
 
 h1 {
-    margin-bottom: 0px; /* Adjust the margin to reduce space */
+    margin-bottom: 0px;
+    font-family: Nosifer;
+    background: linear-gradient(135deg, #0015ff, #fffb00);
+    background: linear-gradient(to right, #81b8d6,#0b97e3, #1281bd,rgb(60, 214, 137), #0272af, #0be3cd, #0b97e3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 h3 {
-margin-top: 0px; /* Adjust the margin to reduce space */
-font-weight: 500;
-background: linear-gradient(to right, #0b97e3,#0b97e3, #033753,rgb(0, 4, 0),rgb(0, 4, 0), #0272af, #0b97e3, #0b97e3);
-color: transparent;
-background-clip: text;
--webkit-background-clip: text; /* Safari/Chrome */
--moz-background-clip: text; /* Firefox */
-background-clip: text;
-
-display: inline;
+    margin-top: 0px; /* Adjust the margin to reduce space */
+    font-weight: 500;
+    background: linear-gradient(to right, #0b97e3,#0b97e3, #033753,rgb(0, 4, 0),rgb(0, 4, 0), #0272af, #0b97e3, #0b97e3);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text; /* Safari/Chrome */
+    -moz-background-clip: text; /* Firefox */
+    background-clip: text;
+    font-family: Indie Flower;
+    font-weight: bolder;
+    display: inline;
 
 }
 
@@ -147,16 +155,22 @@ box-shadow: none; /* Remove the glow effect when clicked */
 }
 
 
+.container{
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+    color: white;
+    font-size: calc(10px + 2vmin);
+}
 
 .name_pic{
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align:center;
+    text-align: center;
     align-items: center;
-    position: absolute;
-    top: 5%;
+    
 }
 
 .name_pic img{
@@ -207,7 +221,7 @@ box-shadow: none; /* Remove the glow effect when clicked */
 
 .hr_line{
     border: none;
-    height: 0.2em;
+    height: 0.1em;
     width: 60%;
     background: cyan;
     box-shadow: 0 0 10px cyan;
@@ -216,10 +230,13 @@ box-shadow: none; /* Remove the glow effect when clicked */
 
 
 .profile_navbar{
+    font-size: calc(10px + 2vmin);
     width: 50%;
+    margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    flex-wrap: wrap;
     padding-bottom: 1%;
     border-bottom: 1px solid cyan;
     box-shadow: 0 4px 0 0 rgba(0, 255, 255, 0.10);
@@ -227,6 +244,9 @@ box-shadow: none; /* Remove the glow effect when clicked */
 
 .profile_navbar_item{
     border-bottom: 2px solid transparent;
+    font-size: 0.9em;
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
 .profile_navbar_item:hover{
@@ -236,6 +256,25 @@ box-shadow: none; /* Remove the glow effect when clicked */
 }
 
 .profile_details{
-    background-color: #00d8ff;
-    height: 100px;
+    padding: 2%;
+    margin: auto;
+    margin-bottom: 5%;
+    width: 50%;
+    min-height: fit-content;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.shayari_card{
+    margin: auto;
+    margin-bottom: 2%;
+    padding: 1%;
+    background-color: white;
+    color: #000000;
+    font-family: 'Varela Round' ;
+    font-size: 16px;
+    font-weight: 500;
+    width: 95%;
+    height: 4em;
+    overflow: scroll;
 }
