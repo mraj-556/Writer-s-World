@@ -16,9 +16,8 @@ function ProfilePage() {
   अपनी तनहा सी जिंदगी के लिए।`  
 
   return (
-    <div className='App'>
-      <div className='container'>
-        <br/><br/>
+      <div className='App-header'>
+        <br/>
         <div className='name_pic'>
           <img src={profileimg} alt="profile" /> <br/>
           
@@ -52,9 +51,7 @@ function ProfilePage() {
           <ShayariCard text={"Its shayari6"}/>
           <ShayariCard text={"Its shayari7"}/>
         </div>
-
       </div>
-    </div>
   )
 }
 

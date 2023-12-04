@@ -80,7 +80,6 @@
 h1 {
     margin-bottom: 0px;
     font-family: Nosifer;
-    background: linear-gradient(135deg, #0015ff, #fffb00);
     background: linear-gradient(to right, #81b8d6,#0b97e3, #1281bd,rgb(60, 214, 137), #0272af, #0be3cd, #0b97e3);
     background-clip: text;
     -webkit-background-clip: text;
@@ -90,7 +89,7 @@ h1 {
 h3 {
     margin-top: 0px; /* Adjust the margin to reduce space */
     font-weight: 500;
-    background: linear-gradient(to right, #0b97e3,#0b97e3, #033753,rgb(0, 4, 0),rgb(0, 4, 0), #0272af, #0b97e3, #0b97e3);
+    background: linear-gradient(to right, #81b8d6,#0b97e3, #1281bd,rgb(60, 214, 137), #0272af, #0be3cd, #0b97e3);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text; /* Safari/Chrome */
@@ -107,8 +106,6 @@ h3 {
 .App{
     background-color: #000000;
 }
-
-
 
 .App-header {
     background-color: transparent;    
@@ -139,18 +136,18 @@ h3 {
 .continue_btn {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #1e1e1e; /* Dark background color */
-    color: #00d8ff; /* Futuristic blue text color */
+    background-color: black;
+    color: #00d8ff;
     font-size: 16px;
     border: solid 0.1em rgb(0, 236, 236);
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s, color 0.3s;
-    text-transform: uppercase; /* Uppercase text */
-    font-weight: bold; /* Bold text */
-    letter-spacing: 1px; /* Increase letter spacing */
-    text-decoration: none; /* Remove underlines */
-    box-shadow: 0 0 10px rgba(0, 216, 255, 0.3); /* Futuristic glow effect */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    box-shadow: inset 0 0 5px cyan;
 }
 
 .continue_btn:hover {
@@ -166,7 +163,7 @@ box-shadow: none; /* Remove the glow effect when clicked */
 }
 
 
-
+/* Login / Sign UP Page */
 
 .login-form{
     width: 30%;
@@ -195,6 +192,24 @@ box-shadow: none; /* Remove the glow effect when clicked */
     border: 0;
 }
 
+.btn{
+    background-color: transparent;
+    border: none;
+}
+.btn:hover{
+    background-color: transparent;
+    box-shadow: inset 2px 2px 2px cyan , 2px 2px 2px cyan;
+    text-shadow: 0 0 10px cyan;
+}
+.btn:focus{
+    background-color: transparent;
+    outline: none;
+    box-shadow: inset 2px 2px 2px cyan , 2px 2px 2px cyan;
+    text-shadow: 0 0 10px cyan;
+}
+
+
+/* Type Page */
 
 .text-area {
     position: relative;
@@ -249,14 +264,9 @@ box-shadow: none; /* Remove the glow effect when clicked */
 }
 
 
-.container{
-    width: 100%;
-    min-height: 100vh;
-    max-height: 100vh;
-    overflow-y: scroll;
-    color: white;
-    font-size: calc(10px + 2vmin);
-}
+
+/* Profile Page */
+
 
 .name_pic{
     width: 100%;
