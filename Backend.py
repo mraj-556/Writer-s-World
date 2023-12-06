@@ -7,17 +7,11 @@ app = Flask(__name__)
 CORS(app)
 
 
-class Database():
-    def __init__(self, db_name):
-        self.db_name = db_name
-        try:
-            self.conn_obj = sql.connect(self.db_name)
-            self.cursor = self.conn_obj.cursor()
-            print("Connected to : {} and cursor created....".format(db_name))
-        except Exception as err1:
-            print("Exception1 : {}".format(err1))
-    
-    # def update_record(**kwargs): {tabelename:"tab_name", col1:"value"}
+def insert_record(db_name,tablename,**kwarg):
+    #  {db_name:"db_name", tabelename:"tab_name", col1:"value", , col2:"value".....}
+    conn_obj = sql.connect(db_name)
+    cursor = conn_obj.cursor()
+    cursor.execute()
 
 
 
