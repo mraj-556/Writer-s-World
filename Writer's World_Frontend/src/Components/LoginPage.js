@@ -36,30 +36,35 @@ function LoginPage() {
 
 
 
-
-
   return (
-    <div className="App-header" style={{backgroundColor:"black"}}>
+    <div className="App-content">
+      <div className='App-content-content'>
         <div>Writer's &nbsp; World</div>
-
         <div className="login-form">
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="basic-addon1"><VscAccount size={20} color="cyan" style={{ borderRadius: '50%' , boxShadow: '0 0 10px 5px cyan' }}/></span>
+                <span className="input-group-text" id="basic-addon1"><VscAccount size={20} color="whitesmoke" style={{ borderRadius: '50%' }}/></span>
                 <input type="text" name="username" className="form-control login-inp" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" autoFocus autoComplete='off' required value={username} onChange={(e) => setUsername(e.target.value)}/>
             </div>
             <br/>
+
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="basic-addon1"><RiLockPasswordFill size={20} color="cyan" style={{ borderRadius: '50%' , boxShadow: '0 0 10px 5px cyan' }}/></span>
+                <span className="input-group-text" id="basic-addon1"><RiLockPasswordFill size={20} color="whitesmoke" style={{ borderRadius: '50%' }}/></span>
                 <input type="password" name="password" className="form-control login-inp" placeholder="Password" aria-label="Username" aria-describedby="addon-wrapping" autoComplete='off' required value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
             <br/>
+            
+            {error && <div className='err-msg' style={{ color: 'red' }}>{error} &nbsp; <CiWarning size={20} style={{ borderRadius: '50%'}}/></div>}
+            
             <button type="submit" className="btn btn-primary mb-3" onClick={handleLogin}>Login</button>
-            {error && <div className='err-msg' style={{ color: 'red' }}>{error} &nbsp; <CiWarning size={20} style={{ borderRadius: '50%' , boxShadow: '0 0 10px 5px red' }}/></div>}
             <hr style={{backgroundColor:"white"}}/>
+            
             <Link to="/signup">
-              <button type="submit" className="btn btn-primary mb-3">New ? Sign UP</button> 
+              <button type="submit" className="btn btn-primary mb-3">Sign UP</button> 
             </Link>
+
         </div>
+
+      </div>
     </div>
   )
 }
