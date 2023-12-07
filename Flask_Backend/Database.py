@@ -1,12 +1,13 @@
 import sqlite3 as sql
 
-conn_obj = sql.connect("main_db.db")
-cursor = conn_obj.cursor()
+# conn_obj = sql.connect("main_db.db")
+# cursor = conn_obj.cursor()
 
 # cursor.execute("""create table User_Account(
 #                User_Name text unique not null,       Password text not null,                Profile_Picture blob not null,
 #                Nick_Name text not null,             Email text not null, Phone_No text,    Dob datetime, Region text not null,
-#                Language text not null, Genre text,  Security_qn text not null,             Security_ans text not null
+#                Language text not null, Genre text,  Security_qn text not null,             Security_ans text not null,
+#                Time_Stamp datetime not null
 #                )
 #                """)
 
@@ -38,8 +39,8 @@ cursor = conn_obj.cursor()
 #                )
 #                """)
 
-def drop_table(table):
-    cursor.execute("drop table {}".format(table))
-    print(f"Dropped table : {table}")
+# def drop_table(table):
+#     cursor.execute("drop table {}".format(table))
+#     print(f"Dropped table : {table}")
 
-# drop_table("Bio")
+# drop_table("User_Account")

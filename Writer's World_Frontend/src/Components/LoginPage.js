@@ -22,11 +22,11 @@ function LoginPage() {
         password: password,
       });
       const recvd_data = response.data;
-      if (recvd_data==="Allow"){
+      if (recvd_data['auth']==="Allow"){
         navigate('/profile');
       }
       else{
-        setError('Login failed. Please check your credentials.');
+        setError(`Login failed : ${recvd_data['msg']}`);
       }
 
     } catch (error) {
