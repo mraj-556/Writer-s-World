@@ -29,7 +29,8 @@ function LoginPage() {
         setError(`Login failed : ${recvd_data['msg']}`);
       }
 
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Login failed:', error);
     }
   };

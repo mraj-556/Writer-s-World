@@ -1,11 +1,18 @@
-import base64, re, sqlite3 as sql, bcrypt
+import base64, re, sqlite3 as sql, bcrypt, secrets
 import json
 from datetime import datetime
 from flask import Flask, render_template, Response , jsonify , request, session
 from flask_cors import CORS
 
 app = Flask(__name__)
+secret_key = secrets.token_hex(16)
+print("Secret key: " , secret_key)
+app.secret_key = secret_key
 CORS(app)
+
+# global variables
+global session_username
+session_username = None 
 
 
 def db_manipulation(cmd,db_name=None,cursor_obj=None):
@@ -39,7 +46,7 @@ def insert_record(db_name:str,tablename:str,data:dict):
         qn_mark = f'({", ".join("?" for _ in range(len(data)))})'
         cmd1 = f"insert into {tablename}{tuple(data.keys())} values{qn_mark}"
         cmd2 = (list(data.values()))
-        print(cmd1,cmd2)
+        # print(cmd1,cmd2)
         db_connected_references[1].execute(f"{cmd1}",(cmd2))
         print("Inserteed info")
 
@@ -58,8 +65,11 @@ def retrive_record(db_name:str, tablename:str, columns=None, conditions=None, ro
                 if conditions is not None:
                     conditions_lst = list(conditions.items())
                     cond_str = ' and '.join(f'{key}=?' for key, value in conditions_lst)
+
                     cmd1 = f"select * from {tablename} where {cond_str} "
                     cmd2 = list(conditions.values())
+                    print(cmd1,cmd2)
+                    
                     retrived_row = db_connected_references[1].execute(cmd1,(cmd2))
                     retrived_row = retrived_row.fetchall()
                     print("Row Retrived")
@@ -70,10 +80,11 @@ def retrive_record(db_name:str, tablename:str, columns=None, conditions=None, ro
                 if conditions is not None and columns is not None:
                     conditions_lst = list(conditions.items())
                     cond_str = ' and '.join(f'{key}=?' for key, value in conditions_lst)
-                    cols = " ".join(columns)
+                    cols = ", ".join(columns)
 
                     cmd1 = f"select {cols} from {tablename} where {cond_str} "
                     cmd2 = list(conditions.values())
+                    print(cmd1,cmd2)
 
                     retrived_cols = db_connected_references[1].execute(cmd1,(cmd2)).fetchall()
                     print("Columns Retrived")
@@ -126,8 +137,10 @@ def preprocess_data(data:list):
     else:
         print("List required")
 
+
 @app.route('/userpage', methods=['GET','POST'])
 def login():
+    global session_username
     data = request.json
     username = data.get('username')
     password = data.get('password')
@@ -135,14 +148,20 @@ def login():
 
     if valid_data and (username and password) :
         retrived_password = retrive_record("main_db.db", "User_Account", columns=['Password'], conditions={'User_Name':username} , row=1)
-        retrived_password = retrived_password[0][0]
+        if len(retrived_password)!=0:
+            retrived_password = retrived_password[0][0]
+        else:
+            msg = {"auth":"Deny", "msg":"Invalid Username"}
+            print(msg['msg'])
+            return jsonify(msg)
 
         password_match = bcrypt.checkpw(password.encode('utf-8'), retrived_password)
 
         if password_match:
-            session['User_Name'] = username
-
-            msg = {"auth":"Allow", "msg":"Correct Credentials"}
+            # session['User_Name'] = username
+            session_username = username
+            print(session)
+            msg = {"auth":"Allow", "msg":"Login Successfull"}
             return jsonify(msg)
         else:
             msg = {"auth":"Deny", "msg":"Incorrect Credentials"}
@@ -172,7 +191,7 @@ def signup():
     username = data.get('username')
     password = data.get('password')
     password1 = data.get('password1')
-    profile_pic = './static/default_profile.jpg'
+    profile_pic = './static/nature.jpeg'
     with open(profile_pic, 'rb') as f:
         profile_pic = f.read()
     nick_name = "Guest User"
@@ -184,20 +203,24 @@ def signup():
     genre = json.dumps([])
     security_qn = data.get('security_qn')
     security_ans = data.get('security_ans')
+    follower , following, rating, rating_sample = 1, 5, 2, 10
 
     valid_data = preprocess_data([username,password,password1,nick_name,email,phone_no,regions,language])
-    print(security_qn,security_ans)
+
     if valid_data:
         pass_strength = password_strength(password)
         if pass_strength == "Strong":
             if password == password1:
-                print("Password matched")
                 password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-                data = {"User_Name":username, "Password":password, "Profile_Picture":profile_pic, "Nick_Name":nick_name,
+                data_account = {"User_Name":username, "Password":password, "Profile_Picture":profile_pic, "Nick_Name":nick_name,
                         "Email":email, "Phone_No":phone_no, "Dob":dob, "Region":regions, "Language":language, "Genre":genre,
                         "Security_qn":security_qn, "Security_ans":security_ans, "Time_Stamp":datetime.now()
                         }
-                insert_record("main_db.db","USer_Account",data)
+                data_popularity = {"User_Name":username, "Followers":follower, "Following":following, 
+                                   "Rating":rating, "Rating_Sample":rating_sample
+                                   }
+                insert_record("main_db.db","USer_Account",data_account)
+                insert_record("main_db.db","Popularity",data_popularity)
                 print("Sign Up Successfull")
                 msg = {"auth":"Allow", "msg":"Sign Up Successfull"}
                 return jsonify(msg)
@@ -217,9 +240,37 @@ def signup():
 
 
 
-@app.route('/publish', methods=['GET','POST'])
-def publish():
-    data = request.json
+@app.route('/profile', methods=['GET'])
+def fetch_profile():
+    global session_username
+
+    print("Session username : ",session_username)
+    if session_username is None:
+        msg = {"auth":"Deny", "msg":"User not logged in !"}
+        print("login first")
+        return jsonify(msg)
+
+    columns = ['Profile_Picture','Nick_Name','Email','Phone_No','Dob','Region','Language',"Genre"]
+    conditions = {'User_Name':"Uma1"}
+    user_data_account = retrive_record("main_db.db","User_Account",columns=columns,conditions=conditions,row=1)
+    user_data_bio = retrive_record("main_db.db","Bio",columns=["Description"],conditions=conditions,row=1)
+    if len(user_data_bio)!=0:
+        user_data_bio = user_data_bio[0][0]
+    user_popularity = retrive_record("main_db.db","Popularity",columns=["Followers","Following","Rating"],conditions=conditions,row=1)
+    print("user_popularity",user_popularity)
+
+    user_data = {"User_Name":session_username,"Profile_Picture":user_data_account[0][0], "Nick_Name":user_data_account[0][1], "Email":user_data_account[0][2], 
+                    "Phone_No":user_data_account[0][3], "Dob":user_data_account[0][4], "Region":user_data_account[0][5],
+                    "Language":user_data_account[0][6], "Genre":user_data_account[0][7], "Description":user_data_bio,
+                    "Popularity":user_popularity
+                    }
+    profile_picture_base64 = base64.b64encode(user_data['Profile_Picture']).decode('utf-8')
+    user_data['Profile_Picture'] = profile_picture_base64
+    
+    msg = {"auth":"Allow", "msg":user_data}
+    print("User has been logged in...")
+    return jsonify(msg)
+    
 
 
 
